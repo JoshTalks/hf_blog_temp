@@ -63,5 +63,9 @@ The Hindi sets therefore ship a lattice: for each span of the transcript, the se
 
 Thus, for Hindi the [Orthographically-Informed Word Error Rate (OIWER)](https://ieeexplore.ieee.org/abstract/document/11464888) is reported instead of WER. A hypothesis is aligned against the accepted set at each span, so any admitted form counts as correct and only genuine recognition errors are charged.
 
+To quantify the effect, the same hypotheses were scored twice. Flattening each lattice to its first variant per span yields a single string reference of the kind a conventional benchmark provides; any of the admitted variants would serve equally well, and a different choice would yield a different reference. Scored against the flattened reference, error rates rise for every system, and they do not rise uniformly. Rankings change as a consequence. The figure below shows two pairs of systems that reverse order between the two references: under a single reference a system is rewarded in part for reproducing the annotator's orthography, whereas the lattice scores only recognition.
+
+![WER against OIWER on Monsoon hi](https://storage.googleapis.com/research_team_data/csv_files/hindi_oiwer_flips.png)
+
 We also open source our implementation, [voi-oiwer](https://pypi.org/project/voi-oiwer), so every result on these sets can be reproduced directly.
 

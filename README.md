@@ -131,30 +131,14 @@ We also open source our implementation, [voi-oiwer](https://pypi.org/project/voi
 
 ## How can I evaluate my model on this data?
 
-The public splits are on the Hub under CC BY 4.0, so you can score yourself today:
-
-```python
-from datasets import load_dataset
-
-en = load_dataset("VoiceArena/Monsoon-Open-ASR-Leaderboard-en", split="test")
-hi = load_dataset("VoiceArena/Monsoon-Open-ASR-Leaderboard-hi", split="test")
-```
-
-Indian English is scored with the leaderboard's standard normaliser and WER. Hindi is scored with OIWER against the lattice, which needs `pip install voi-oiwer`.
-
 For the private splits, get your model on the Open ASR Leaderboard and we'll run the evaluation. As before, the process for adding a model to the leaderboard takes place on the [Open ASR Leaderboard GitHub](https://github.com/huggingface/open_asr_leaderboard):
 
 1. Open a pull request, and a [model checklist](https://github.com/huggingface/open_asr_leaderboard/blob/main/.github/PULL_REQUEST_TEMPLATE.md#new-model-checklist) will appear. As before, you should report your results on the public datasets.
 2. We will verify the results on the public sets and compute the metrics on the private ones.
 3. Confirm the results we've obtained.
 
-Indian English joins the main leaderboard as Voice Arena Monsoon, in the default column set rather than as an opt-in toggle, so it contributes to the headline Average WER for every model.
+Indian English joins the [main leaderboard](https://huggingface.co/spaces/hf-audio/open_asr_leaderboard) as Voice Arena Monsoon, in the default column set rather than as an opt-in toggle, so it contributes to the headline Average WER for every model. Hindi appears in the [Multilingual tab](https://huggingface.co/spaces/hf-audio/open_asr_leaderboard), where a model is ranked only if it supports every selected language, making that column a like-for-like comparison. Both private sets feed the aggregated Private (conversational) column alongside Appen and DataoceanAI.
 
-![Voice Arena Monsoon in the default column set on the main Open ASR Leaderboard](https://storage.googleapis.com/research_team_data/csv_files/leaderboard.jpeg)
-
-Hindi appears in the Multilingual tab, where a model is ranked only if it supports every selected language, making that column a like-for-like comparison. Both private sets feed the aggregated Private (conversational) column alongside Appen and DataoceanAI.
-
-![The Multilingual tab showing language selection and the coverage rule, with Hindi among the selectable languages](https://storage.googleapis.com/research_team_data/csv_files/leaderboard_2.jpeg)
+## What comes next
 
 The gap here is not specific to Hindi. Any language where the benchmark and the deployment condition have drifted apart has the same problem, and the fix is the same: spontaneous speech, speakers on record, references that admit the spellings people actually write.
-

@@ -20,6 +20,62 @@ Four splits, two languages, collected through one pipeline.
 The data is sourced from unscripted dual-channel spontaneous conversations, with clips segmented from a single channel so that each clip carries one speaker. Along with the fields reported in the table, each clip also records occupation, education, marital status, income band, handset brand, current city and years in the current district.
 The English sets use standard string references, where the leaderboard's normaliser collapses most spelling variation. Hindi has far more of it, and no normaliser can resolve it, because the variants are not a fixed mapping between two conventions. The Hindi sets therefore ship a lattice: for each span of the transcript, a list of the spellings that are accepted as correct.
 
+## Who is in the data
+
+Monsoon is small measured in hours and large measured in speakers. That is the design, and it is where most of the value sits.
+
+**Speaker concentration and diversity beyond the fields above.**
+
+| | hi public | hi private | en-IN public | en-IN private |
+| :--- | :--- | :--- | :--- | :--- |
+| Segments per speaker (mean) | 1.61 | 1.56 | 1.46 | 1.48 |
+| Speakers with a single segment | 261 | 994 | 956 | 924 |
+| Audio per speaker (median) | 8.34 s | 8.28 s | 12.36 s | 12.39 s |
+| Share held by top 10 speakers | 6.8% | 3.1% | 2.8% | 2.9% |
+| Current cities | 289 | 814 | 641 | 584 |
+| Device manufacturers | 18 | 25 | 23 | 20 |
+
+Three properties follow, and each is a claim about variance rather than volume.
+
+**No voice carries the score.** The ten largest contributors account for between 2.8 and 6.8 per cent of total duration, and more than half of all speakers appear exactly once. A result on Monsoon is an average over hundreds of distinct voices, not a small number of talkers recorded at length. Test sets of comparable duration are usually constructed the other way.
+
+**No region or handset carries it either.** The Indian English public set draws on 439 native districts across 30 states and union territories; the Hindi sets, being a Hindi-belt language, concentrate more tightly but still span 209 and 310 districts. Recordings come from 315 to 582 distinct device models, with no single model exceeding 1.6 per cent of segments in any subset. Corpora collected on standardised hardware overfit to one microphone response; this one cannot.
+
+**Indian English here is not one accent.** Speakers in the Indian English sets report 13 first languages in the public set and 14 in the private, with roughly one segment in six coming from a speaker whose stated language is not English. The accent variation in the audio has an identifiable linguistic cause, and it is recorded in the metadata rather than asserted.
+
+**First languages represented in the Indian English public set, by speaker.**
+
+| Language | Speakers | Segments | Share of duration |
+| :--- | :--- | :--- | :--- |
+| English | 1,197 | 1,754 | 84.8% |
+| Hindi | 93 | 133 | 5.6% |
+| Telugu | 60 | 87 | 3.9% |
+| Tamil | 19 | 28 | 1.5% |
+| Bengali | 18 | 28 | 1.3% |
+| Marathi | 22 | 24 | 0.9% |
+| Gujarati | 15 | 20 | 0.7% |
+| Bhojpuri, Maithili, Malayalam, Kannada, Punjabi, Haryanvi | 20 | 28 | 1.2% |
+
+### Metadata fields
+
+Monsoon ships 18 columns per segment, of which 16 are metadata, where most public ASR test sets ship an identifier, a transcript and a duration. Demographic fields are complete or near-complete; contributors consented to this use.
+
+| Group | Fields |
+| :--- | :--- |
+| Segment | `id`, `audio`, `audio_length_s`, `language` |
+| Reference | `lattice` (Hindi) or `text` (Indian English) |
+| Speaker | `speaker_id`, `gender`, `date_of_birth` |
+| Background | `occupation`, `educational_background`, `marital_status`, `income` |
+| Geography | `native_district`, `native_state`, `current_city`, `years_spent_in_current_district` |
+| Recording | `device_manufacturer`, `device_model` |
+
+
+![speakers by native state across the four subsets](https://storage.googleapis.com/research_team_data/csv_files/district_distribution_v2.jpeg)
+
+The two languages have different geographic shapes, and the shape is informative. The Hindi sets concentrate in the Hindi belt, with Uttar Pradesh accounting for roughly 40 per cent of speakers, which is what a Hindi corpus sampled by population should look like. The Indian English sets are much flatter: no state exceeds 13 per cent, and a third of speakers come from outside the eight largest. Public and private halves match closely on both.
+
+Indian state boundaries were drawn along linguistic lines, so district and state carry real accent signal, which is why these fields are released rather than summarised away. Analysis of this kind has been reported at scale for Indian ASR [2]: district-level error rates spanning roughly 4 to 44 per cent, with underrepresented regions well behind the Hindi belt and the metros, plus disaggregation by audio quality, speaking rate, utterance duration, gender, age and device. Those runs were on a closed benchmark. Monsoon makes the same class of analysis possible on a public leaderboard test set.
+
 ## How do we ensure what we are collecting is not noise
 
 ![monsoon_collection_and_annotation_pipeline](https://storage.googleapis.com/research_team_data/csv_files/monsoon_collection_and_annotation_pipeline.png)
@@ -27,12 +83,16 @@ The English sets use standard string references, where the leaderboard's normali
 
 Broad geographic coverage requires recruitment across hundreds of districts rather than longer sessions from fewer speakers, and distributed recruitment at this scale introduces failure modes that a smaller collection does not face: contributors gaming the task, played-back audio submitted as live speech, and inattentive annotation. Each is addressed by an explicit check.
 
-Recordings were collected on an online platform on which pairs of contributors recorded dual-channel conversations on assigned everyday topics. Contributors used their own devices, frequently low-end handsets on unstable connections, which accounts for the device and acoustic diversity reported above. Prospective contributors completed a language proficiency screening before being granted recording access, were compensated, and provided informed consent covering use in training and distribution. A per-speaker duration cap, calibrated per language to the population size and geographic distribution of its speakers, prevented a small number of prolific contributors from dominating a language or region; more than half of the speakers in these sets contribute exactly one segment.
+**Recruitment and recording.**
+Contributors were recruited through the Voice Arena community, a nationwide digital platform whose reach extends into the rural and semi-urban districts that speech corpora rarely cover. Pairs then recorded two-person conversations over a peer-to-peer interface, dual-channel, on assigned everyday topics. Contributors used their own handsets and their own connections. Many of those are low-end devices on unstable bandwidth, which is why that condition is present in the released audio rather than filtered out of it. Prospective contributors completed a language proficiency screening before being granted recording access, were compensated, and provided informed consent covering use in training and distribution. A per-speaker duration cap, calibrated per language to the population size and geographic distribution of its speakers, prevented a small number of prolific contributors from dominating a language or region; more than half of the speakers in these sets contribute exactly one segment.
 
+**Elicitation.**
 Eliciting spontaneous speech at scale presents its own difficulty, as contributors tend to produce short and sparse responses without structured guidance. Each conversation was therefore seeded with an open-ended narrative cue and progressively revealed follow-up questions, spanning domains including travel, healthcare, agriculture, education and digital services, guiding the exchange toward extended description without scripting it. Candidate topics were generated with large language models, then reviewed and localised by native-speaker linguists.
 
+**Quality control.**
 Every recording passed a set of gating checks prior to transcription. The spoken language was verified against the assigned language using language identification models trained on human-annotated data across more than 30 languages. Speaker gender was confirmed against the self-reported label using a dedicated classifier, applied as corroboration of the self-report rather than as a replacement for it. A further model distinguished genuine spontaneous conversation from pre-recorded or played-back audio. Signal-to-noise ratio estimation removed recordings degraded beyond intelligibility, while natural environmental background noise was deliberately preserved so that the acoustic realism of in-the-wild speech is retained. Recordings clearing these checks were segmented by voice activity detection, split at two seconds of continuous silence or at a fifteen-second soft cap closed at the next detected silence. Segmentation was applied independently per channel, so every segment is single-speaker and single-channel. Segments then passed a DNSMOS P.808 check.
 
+**Transcription.**
 Reference transcripts are human work. A first draft was generated by internal ASR models trained on in-domain data, none of which appear on any public leaderboard, so no system evaluated on these sets contributed to the references it is scored against. Every subsequent stage was performed by native-speaking linguists under a five-level protocol built on a strict separation of labour, in which each correction round is followed by an independent verification round performed by a different annotator, so no linguist audits their own output. A linguist first corrects the draft segment by segment against the acoustic signal; a second re-verifies it and flags residual disagreements. Subsequent levels iterate this cycle with fresh annotators, progressively resolving ambiguous phonetic realisations, code-switching boundaries, named entities, and orthographic consistency across spelling variants. Numerals are written as words, so that the transcript corresponds directly to what was spoken. Segments still flagged at the final level were returned for re-transcription before admission. Annotator behaviour was monitored automatically throughout, flagging submissions containing characters outside the target script, unnatural character or word repetitions, and unusually low or high edit counts.
 
 ## What the metadata makes visible
@@ -68,4 +128,33 @@ To quantify the effect, the same hypotheses were scored twice. Flattening each l
 ![WER against OIWER on Monsoon hi](https://storage.googleapis.com/research_team_data/csv_files/hindi_oiwer_flips.png)
 
 We also open source our implementation, [voi-oiwer](https://pypi.org/project/voi-oiwer), so every result on these sets can be reproduced directly.
+
+## How can I evaluate my model on this data?
+
+The public splits are on the Hub under CC BY 4.0, so you can score yourself today:
+
+```python
+from datasets import load_dataset
+
+en = load_dataset("VoiceArena/Monsoon-Open-ASR-Leaderboard-en", split="test")
+hi = load_dataset("VoiceArena/Monsoon-Open-ASR-Leaderboard-hi", split="test")
+```
+
+Indian English is scored with the leaderboard's standard normaliser and WER. Hindi is scored with OIWER against the lattice, which needs `pip install voi-oiwer`.
+
+For the private splits, get your model on the Open ASR Leaderboard and we'll run the evaluation. As before, the process for adding a model to the leaderboard takes place on the [Open ASR Leaderboard GitHub](https://github.com/huggingface/open_asr_leaderboard):
+
+1. Open a pull request, and a [model checklist](https://github.com/huggingface/open_asr_leaderboard/blob/main/.github/PULL_REQUEST_TEMPLATE.md#new-model-checklist) will appear. As before, you should report your results on the public datasets.
+2. We will verify the results on the public sets and compute the metrics on the private ones.
+3. Confirm the results we've obtained.
+
+Indian English joins the main leaderboard as Voice Arena Monsoon, in the default column set rather than as an opt-in toggle, so it contributes to the headline Average WER for every model.
+
+![Voice Arena Monsoon in the default column set on the main Open ASR Leaderboard](https://storage.googleapis.com/research_team_data/csv_files/leaderboard.jpeg)
+
+Hindi appears in the Multilingual tab, where a model is ranked only if it supports every selected language, making that column a like-for-like comparison. Both private sets feed the aggregated Private (conversational) column alongside Appen and DataoceanAI.
+
+![The Multilingual tab showing language selection and the coverage rule, with Hindi among the selectable languages](https://storage.googleapis.com/research_team_data/csv_files/leaderboard_2.jpeg)
+
+The gap here is not specific to Hindi. Any language where the benchmark and the deployment condition have drifted apart has the same problem, and the fix is the same: spontaneous speech, speakers on record, references that admit the spellings people actually write.
 

@@ -141,4 +141,6 @@ Indian English joins the [main leaderboard](https://huggingface.co/spaces/hf-aud
 
 ## What comes next
 
-The gap here is not specific to Hindi. Any language where the benchmark and the deployment condition have drifted apart has the same problem, and the fix is the same: spontaneous speech, speakers on record, references that admit the spellings people actually write.
+Hindi is a sharp case of a general problem. Any language written more than one way, spoken by people a benchmark has not sampled, carries both of the failures described here. These sets do not fix them. What they add is a way to see them: a test set on a leaderboard the field already watches, carrying enough about each speaker and each reference that a difference between two systems can be traced to who was talking and how they write it, instead of disappearing into one number.
+
+These four sets are part of Monsoon, Voice Arena's broader dataset initiative for the Global South.

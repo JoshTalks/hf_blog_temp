@@ -109,7 +109,7 @@ Which zone is hardest is not fixed either. granite-speech-3.3-2b is worst in the
 
 Region is one of twelve recorded attributes, and the zones above are a coarse rollup of 428 districts. The same breakdown runs on age, education, occupation, handset and first language, and the released files carry everything needed to reproduce it. None of it is available for a test set that records only what was said.
 
-## What counts as an error in Hindi?
+## What counts as an error in Hindi
 
 English orthographic variation is bounded. British against American spelling, punctuation, casing, digits against words: a normaliser can map most of it to a single form, and the leaderboard's does. Hindi is not bounded in the same way. Everyday speech is heavily code-mixed, English-origin words have no settled Devanagari spelling, and compound forms are written joined or separated according to preference. A single phrase can have ten or more valid written forms, and no fixed mapping collapses them, because there is no canonical side to map to.
 
@@ -129,7 +129,7 @@ To quantify the effect, the same hypotheses were scored twice. Flattening each l
 
 We also open source our implementation, [voi-oiwer](https://pypi.org/project/voi-oiwer), so every result on these sets can be reproduced directly.
 
-## How can I evaluate my model on this data?
+## How can I evaluate my model on this data
 
 For the private splits, get your model on the Open ASR Leaderboard and we'll run the evaluation. As before, the process for adding a model to the leaderboard takes place on the [Open ASR Leaderboard GitHub](https://github.com/huggingface/open_asr_leaderboard):
 

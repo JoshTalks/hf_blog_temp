@@ -20,7 +20,7 @@ Four splits, two languages, collected through one pipeline.
 The data is sourced from unscripted dual-channel spontaneous conversations, with clips segmented from a single channel so that each clip carries one speaker. Along with the fields reported in the table, each clip also records occupation, education, marital status, income band, handset brand, current city and years in the current district.
 The English sets use standard string references, where the leaderboard's normaliser collapses most spelling variation. Hindi has far more of it, and no normaliser can resolve it, because the variants are not a fixed mapping between two conventions. The Hindi sets therefore ship a lattice: for each span of the transcript, a list of the spellings that are accepted as correct.
 
-## How do we ensure what we are measuring is not noise
+## How do we ensure what we are collecting is not noise
 
 ![monsoon_collection_and_annotation_pipeline](https://storage.googleapis.com/research_team_data/csv_files/monsoon_collection_and_annotation_pipeline.png)
 

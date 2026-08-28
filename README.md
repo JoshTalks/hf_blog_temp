@@ -75,7 +75,7 @@ Indian state boundaries were drawn along linguistic lines, so district and state
 
 ## Collection and quality control
 
-![monsoon_collection_and_annotation_pipeline](https://storage.googleapis.com/research_team_data/csv_files/monsoon_collection_and_annotation_pipeline.png)
+![monsoon_collection_and_annotation_pipeline](https://storage.googleapis.com/research_team_data/blog_figures/flowchart%201.png)
 
 
 Broad geographic coverage requires recruitment across hundreds of districts rather than longer sessions from fewer speakers, and distributed recruitment at this scale introduces failure modes that a smaller collection does not face: contributors gaming the task, played-back audio submitted as live speech, and inattentive annotation. Each is addressed by an explicit check.
@@ -106,13 +106,13 @@ Region is one of twelve recorded attributes, and the zones above are a coarse ro
 
 English orthographic variation is bounded. British against American spelling, punctuation, casing, digits against words: a normaliser can map most of it to a single form, and the leaderboard's does. Hindi is not bounded in the same way. Everyday speech is heavily code-mixed, English-origin words have no settled Devanagari spelling, and compound forms are written joined or separated according to preference. A single phrase can have ten or more valid written forms, and no fixed mapping collapses them, because there is no canonical side to map to.
 
-![english_normaliser](https://storage.googleapis.com/research_team_data/csv_files/english_normaliser_collapses_variants_to_one_form.png)
+![english_normaliser](https://storage.googleapis.com/research_team_data/blog_figures/flowchart%202.png)
 
 Scored with a single reference, WER rewards a system for producing the spelling the annotator happened to choose. Two systems that recognised the audio equally well can differ by several points on orthography alone.
 
 The Hindi sets therefore ship a lattice: for each span of the transcript, the set of written forms accepted as correct. Building it is manual work. Candidate variants are drawn from multiple ASR transcripts of the same audio and expanded with language models, then native-speaker linguists decide which are valid for that utterance and prune the rest, so only forms consistent with what was said are admitted.
 
-![hindi_oiwer_scoring](https://storage.googleapis.com/research_team_data/csv_files/hindi_lattice_worked_example_one_sentence.png)
+![hindi_oiwer_scoring](https://storage.googleapis.com/research_team_data/blog_figures/flowchart%203a.png)
 
 Thus, for Hindi the [Orthographically-Informed Word Error Rate (OIWER)](https://ieeexplore.ieee.org/abstract/document/11464888) is reported instead of WER. A hypothesis is aligned against the accepted set at each span, so any admitted form counts as correct and only genuine recognition errors are charged.
 

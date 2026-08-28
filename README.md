@@ -26,6 +26,29 @@ Four splits, two languages, collected through one pipeline.
 | Monsoon hi private | Hindi | 4.47 h | 1,571 | 6.6s / 5.3s | 55/45 | 295 | 12/3 | 582 | Conversational, spontaneous | Lattice (accepted orthographic variants) |
 
 The data is sourced from unscripted dual-channel spontaneous conversations, with clips segmented from a single channel so that each clip carries one speaker. Along with the fields reported in the table, each clip also records occupation, education, marital status, income band, handset brand, current city and years in the current district.
+
+Five clips from the public Indian English split, with the metadata each one carries:
+
+29-year-old woman, West Tripura, Tripura. Student, samsung SM-G781B.
+
+<audio controls src="https://storage.googleapis.com/delivery_team_data/sampled_chunks/english/41512950_850_59_859_68.wav"></audio>
+
+32-year-old woman, Satna, Madhya Pradesh. Unemployed, samsung SM-E146B.
+
+<audio controls src="https://storage.googleapis.com/delivery_team_data/sampled_chunks/english/04646786_238_95_252_63.wav"></audio>
+
+22-year-old man, Rohtas, Bihar. Student, motorola moto g54 5G.
+
+<audio controls src="https://storage.googleapis.com/delivery_team_data/sampled_chunks/english/19508278_139_86_149_79.wav"></audio>
+
+27-year-old woman, Warangal, Telangana. Unemployed, vivo V2247.
+
+<audio controls src="https://storage.googleapis.com/delivery_team_data/sampled_chunks/english/41114168_788_37_795_21.wav"></audio>
+
+57-year-old man, Puducherry. Private job, Xiaomi M2006C3LI.
+
+<audio controls src="https://storage.googleapis.com/delivery_team_data/sampled_chunks/english/21485437_227_25_237_45.wav"></audio>
+
 The English sets use standard string references, where the leaderboard's normaliser collapses most spelling variation. Hindi has far more of it, and no normaliser can resolve it, because the variants are not a fixed mapping between two conventions. The Hindi sets therefore ship a lattice: for each span of the transcript, a list of the spellings that are accepted as correct.
 
 ## Speaker coverage

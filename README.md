@@ -6,6 +6,14 @@ All of that makes one number harder to game. It is still one number. A long line
 
 To address this gap, we introduce two evaluation sets to the Open ASR Leaderboard: Monsoon en-IN and Monsoon hi. Hindi, spoken by more than half a billion people, is the first Indic language on a multilingual tab that currently covers only European languages. Each set is released as a public split, available for self-scoring, and a private split withheld to limit benchmark-specific optimisation. The four splits are speaker-disjoint, comprising 4,888 speakers, with 12 speaker attributes recorded for each.
 
+## Design of the collection
+
+A test set can only expose a failure mode it varies along. Most benchmarks are built from whatever audio was readily available. Monsoon was built to vary along nine axes: geography, age, gender, vocabulary, devices, acoustic environments, speech type, speech rate, and the existence of multiple valid transcripts for the same audio. Each is a way an aggregate WER can be right on average and wrong for a particular population.
+
+![nine axes of variation in the Monsoon collection](https://storage.googleapis.com/research_team_data/blog_figures/nine-axes-gray.png)
+
+The collection method follows from that. Geography comes from recruiting across hundreds of districts rather than recording longer sessions in fewer places. Devices and acoustic conditions come from contributors using their own handsets and connections, indoors and out, rather than supplied hardware in a quiet room. Vocabulary, speech type and speech rate come from the prompts: everyday topics that push contributors toward opinion, disagreement, narration and recall, which is where named entities, numbers and unrehearsed phrasing appear. Age and gender are recorded per speaker and verified. The ninth axis is a property of the reference rather than the audio, and it is the subject of a later section.
+
 ## Dataset composition
 
 Four splits, two languages, collected through one pipeline.
@@ -19,14 +27,6 @@ Four splits, two languages, collected through one pipeline.
 
 The data is sourced from unscripted dual-channel spontaneous conversations, with clips segmented from a single channel so that each clip carries one speaker. Along with the fields reported in the table, each clip also records occupation, education, marital status, income band, handset brand, current city and years in the current district.
 The English sets use standard string references, where the leaderboard's normaliser collapses most spelling variation. Hindi has far more of it, and no normaliser can resolve it, because the variants are not a fixed mapping between two conventions. The Hindi sets therefore ship a lattice: for each span of the transcript, a list of the spellings that are accepted as correct.
-
-## Design of the collection
-
-A test set can only expose a failure mode it varies along. Most benchmarks are built from whatever audio was readily available. Monsoon was built to vary along nine axes: geography, age, gender, vocabulary, devices, acoustic environments, speech type, speech rate, and the existence of multiple valid transcripts for the same audio. Each is a way an aggregate WER can be right on average and wrong for a particular population.
-
-![nine axes of variation in the Monsoon collection](https://storage.googleapis.com/research_team_data/blog_figures/nine-axes-gray.png)
-
-The collection method follows from that. Geography comes from recruiting across hundreds of districts rather than recording longer sessions in fewer places. Devices and acoustic conditions come from contributors using their own handsets and connections, indoors and out, rather than supplied hardware in a quiet room. Vocabulary, speech type and speech rate come from the prompts: everyday topics that push contributors toward opinion, disagreement, narration and recall, which is where named entities, numbers and unrehearsed phrasing appear. Age and gender are recorded per speaker and verified. The ninth axis is a property of the reference rather than the audio, and it is the subject of a later section.
 
 ## Speaker coverage
 

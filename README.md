@@ -39,22 +39,9 @@ Three properties follow, and each is a claim about variance rather than volume.
 
 - **No voice carries the score:** The ten largest contributors account for between 2.8 and 6.8 per cent of total duration, and more than half of all speakers appear exactly once. A result on Monsoon is an average over hundreds of distinct voices, not a small number of talkers recorded at length. Test sets of comparable duration are usually constructed the other way.
 
-- **No region or handset carries it either:** The Indian English public set draws on 439 native districts across 30 states and union territories; the Hindi sets, being a Hindi-belt language, concentrate more tightly but still span 209 and 310 districts. Recordings come from 315 to 582 distinct device models, with no single model exceeding 1.6 per cent of segments in any subset. Corpora collected on standardised hardware overfit to one microphone response; this one cannot.
+- **No region or handset carries it either:** The Indian English public set draws on 428 native districts across 30 states and union territories; the Hindi sets, being a Hindi-belt language, concentrate more tightly but still span 202 and 295 districts. Recordings come from 315 to 582 distinct device models, with no single model exceeding 2.1 per cent of segments in any subset. Corpora collected on standardised hardware overfit to one microphone response; this one cannot.
 
-- **Indian English here is not one accent:** Speakers in the Indian English sets report 13 first languages in the public set and 14 in the private, with roughly one segment in six coming from a speaker whose stated language is not English. The accent variation in the audio has an identifiable linguistic cause, and it is recorded in the metadata rather than asserted.
-
-**First languages represented in the Indian English public set, by speaker.**
-
-| Language | Speakers | Segments | Share of duration |
-| :--- | :--- | :--- | :--- |
-| English | 1,197 | 1,754 | 84.8% |
-| Hindi | 93 | 133 | 5.6% |
-| Telugu | 60 | 87 | 3.9% |
-| Tamil | 19 | 28 | 1.5% |
-| Bengali | 18 | 28 | 1.3% |
-| Marathi | 22 | 24 | 0.9% |
-| Gujarati | 15 | 20 | 0.7% |
-| Bhojpuri, Maithili, Malayalam, Kannada, Punjabi, Haryanvi | 20 | 28 | 1.2% |
+- **Indian English here is not one accent:** This is English as it is spoken across the country, not the English of one metro. All six zones are represented: in the public set, 35 per cent of segments are contributed by southern speakers, 18 from the East, 18 from Central, 16 from the North and 11 from the West. The accent variation that follows from that spread is recorded in the metadata rather than asserted.
 
 ### Metadata fields
 
@@ -94,13 +81,13 @@ What follows is one example, run on the public Indian English split, to show the
 
 Eight models on the leaderboard land between 4.81 and 4.99 WER on this set. That is 0.18 points from best to worst, inside what five hours can resolve. Ranked on the corpus, they are the same model.
 
-Grouping speakers by region tells a different story. Each speaker's native district is rolled up to its zonal council, the Ministry of Home Affairs grouping of Indian states, giving five well-sampled zones. whisper-large-v3-turbo varies by 0.46 points across them. Voxtral-Mini-3B-2507, four hundredths of a point behind it on the corpus, varies by 1.68, running 4.38 in the Central zone against 6.06 in the East. Two systems that are indistinguishable on the leaderboard differ almost fourfold in how much their accuracy depends on where the speaker is from.
+Grouping speakers by region tells a different story. Each speaker's native district is rolled up to its zonal council, the Ministry of Home Affairs grouping of Indian states, giving five well-sampled zones. whisper-large-v3-turbo varies by 0.46 points across them. Voxtral-Mini-3B-2507, fourteen hundredths of a point behind it on the corpus, varies by 1.68, running 4.38 in the Central zone against 6.06 in the East. Two systems that are indistinguishable on the leaderboard differ almost fourfold in how much their accuracy depends on where the speaker is from.
 
 ![corpus wer against zone range](https://storage.googleapis.com/research_team_data/csv_files/corpus_wer_versus_zone_range_coloured_by_zone.png)
 
 Which zone is hardest is not fixed either. granite-speech-3.3-2b is worst in the North, VibeVoice-ASR-HF in the South, Voxtral-Mini-3B in the East. If a single region were simply harder to transcribe, every model would rank the zones the same way. They do not, which points at the models rather than the audio.
 
-Region is one of twelve recorded attributes, and the zones above are a coarse rollup of 428 districts. The same breakdown runs on age, education, occupation, handset and first language, and the released files carry everything needed to reproduce it. None of it is available for a test set that records only what was said.
+Region is one of twelve recorded attributes, and the zones above are a coarse rollup of 428 districts. The same breakdown runs on age, education, occupation and handset, and the released files carry everything needed to reproduce it. None of it is available for a test set that records only what was said.
 
 ## Orthographic variation in Hindi
 

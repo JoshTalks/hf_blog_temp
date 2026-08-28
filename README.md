@@ -24,6 +24,8 @@ The English sets use standard string references, where the leaderboard's normali
 
 Monsoon is small measured in hours and large measured in speakers. That is the design, and it is where most of the value sits.
 
+The design follows from a constraint: a single error rate cannot describe a population of half a billion speakers, so the collection was structured around the dimensions along which that population actually varies. Nine were sampled deliberately — geography, age, gender, vocabulary, recording device, acoustic environment, speech type, speaking rate, and the number of valid ways a given utterance can be written down. Each is a place a failure mode can hide when only the aggregate is reported. Eight were widened on purpose. The ninth, speech type, was pinned: every clip is spontaneous conversation, because scripted speech is the one condition deployed systems never encounter.
+
 **Speaker concentration and diversity beyond the fields above.**
 
 | | hi public | hi private | en-IN public | en-IN private |
